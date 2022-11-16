@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.mindera.rocketscience.listeners.FilterListener" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/filterBy"
+        android:layout_width="@dimen/zero_width"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:text="@string/filter_by"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/clearFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        tools:text="Filter By" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/clearFilter"
+        android:layout_width="@dimen/zero_width"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_5dp"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_10dp"
+        android:text="@string/clear_filter"
+        android:gravity="end"
+        android:textSize="@dimen/text_16sp"
+        android:onClick="@{() -> clickHandler.clearFilter()}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/filterBy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        tools:text="Clear Filter" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterBy">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/launchFilter"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="@dimen/min_height_50dp"
+                android:layout_marginStart="@dimen/margin_30dp"
+                android:layout_marginEnd="@dimen/margin_30dp"
+                android:gravity="center_vertical"
+                android:text="@string/success_filter"
+                android:textSize="@dimen/text_16sp"
+                android:textStyle="bold"
+                android:onClick="@{() -> clickHandler.filterByLaunchSuccess()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Launch Success" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ascendingSort"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="@dimen/min_height_50dp"
+                android:layout_marginStart="@dimen/margin_30dp"
+                android:layout_marginEnd="@dimen/margin_30dp"
+                android:gravity="center_vertical"
+                android:text="@string/yr_ascending_filter"
+                android:textSize="@dimen/text_16sp"
+                android:textStyle="bold"
+                android:onClick="@{() -> clickHandler.filterByAscending()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/launchFilter"
+                tools:text="Year Ascending" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/descendingSort"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="@dimen/min_height_50dp"
+                android:layout_marginStart="@dimen/margin_30dp"
+                android:layout_marginEnd="@dimen/margin_30dp"
+                android:gravity="center_vertical"
+                android:text="@string/yr_descending_filter"
+                android:textSize="@dimen/text_16sp"
+                android:textStyle="bold"
+                android:onClick="@{() -> clickHandler.filterByDescending()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ascendingSort"
+                tools:text="Year Descending" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/year"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="@dimen/min_height_50dp"
+                android:layout_marginStart="@dimen/margin_30dp"
+                android:layout_marginEnd="@dimen/margin_30dp"
+                android:gravity="center_vertical"
+                android:text="@string/year_filter"
+                android:textSize="@dimen/text_16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descendingSort"
+                tools:text="Year" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/yearRecyclerView"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_50dp"
+                android:paddingBottom="@dimen/padding_10dp"
+                android:textSize="@dimen/text_20sp"
+                android:textStyle="bold"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/year"
+                tools:listitem="@layout/item_year_filter" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

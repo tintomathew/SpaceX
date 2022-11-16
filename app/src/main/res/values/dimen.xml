@@ -1,0 +1,27 @@
+<resources>
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+    <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+
+    <dimen name="padding_5dp">5dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+
+    <dimen name="image_width">90dp</dimen>
+    <dimen name="zero_width">0dp</dimen>
+    <dimen name="min_width_50dp">50dp</dimen>
+
+    <dimen name="min_height_40dp">40dp</dimen>
+    <dimen name="min_height_50dp">50dp</dimen>
+    <dimen name="zero_height">0dp</dimen>
+    <dimen name="image_height">120dp</dimen>
+
+    <dimen name="elevation_2dp">2dp</dimen>
+    <dimen name="radius_5dp">5dp</dimen>
+</resources>

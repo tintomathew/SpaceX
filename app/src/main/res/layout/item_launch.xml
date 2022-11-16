@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.mindera.rocketscience.util.Extensions" />
+        <variable
+            name="clickLaunchHandler"
+            type="com.mindera.rocketscience.listeners.HomeItemListener" />
+
+        <variable
+            name="launchDataModel"
+            type="com.mindera.rocketscience.model.alllaunches.Launch" />
+
+        <variable
+            name="dayDifference"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/elevation_2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        android:onClick="@{(v)-> clickLaunchHandler.launchItemClick(launchDataModel)}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/missionImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/image_height"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{launchDataModel.links.missionPatch}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailsLayout"
+                android:layout_width="@dimen/zero_width"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/statusImage"
+                app:layout_constraintStart_toEndOf="@+id/missionImage">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/missionTitle"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@string/mission_title"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/missionName"
+                    app:layout_constraintBottom_toTopOf="@+id/rocketNameTitle"
+                    tools:text="@string/mission_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/missionName"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@{launchDataModel.missionName}"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/missionTitle"
+                    app:layout_constraintTop_toTopOf="@+id/missionTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/missionTitle"
+                    tools:text="Mission M-Sat" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dateAndTimeTitle"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@string/date_time_title"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/missionTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/rocketNameTitle"
+                    tools:text="@string/date_time_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dateAndTime"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    app:dateText="@{launchDataModel.launchDateUtc}"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dateAndTimeTitle"
+                    app:layout_constraintTop_toTopOf="@+id/dateAndTimeTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/dateAndTimeTitle"
+                    tools:text="Mission M-Sat" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rocketNameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@string/rocket_title"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateAndTimeTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/daysTitle"
+                    tools:text="@string/rocket_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rocketNameType"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@{@string/rocket_name_type(launchDataModel.rocket.rocketName,launchDataModel.rocket.rocketType)}"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rocketNameTitle"
+                    app:layout_constraintTop_toTopOf="@+id/rocketNameTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/rocketNameTitle"
+                    tools:text="Rocket 007" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/daysTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@string/days_title"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rocketNameTitle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="@string/days_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/daysSinceOrFrom"
+                    android:layout_width="@dimen/zero_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:gravity="start | center_horizontal"
+                    android:text="@{dayDifference}"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/daysTitle"
+                    app:layout_constraintTop_toTopOf="@+id/daysTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/daysTitle"
+                    tools:text="Banana cake" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/statusImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@{launchDataModel.launchSuccess ? @drawable/done :@drawable/close}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/detailsLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/done"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>
