@@ -1,2 +1,10 @@
 # SpaceX
- This application provides information about SpaceX company and their launch vechicles. The launch vechicle list is provided with custom filter options. Vechicle details can be seen by clicking the item.
+ This application provides information about SpaceX company and their launch vehicles. The launch vehicle list is provided with custom filter options. Vechicle details can be seen by clicking the item. 
+ 
+ Key componentes used:
+ 
+ - Clean Architecture
+ - Unit testing
+ - Data Binding
+ - Retrofit
+ - Picasso
